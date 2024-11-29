@@ -32,8 +32,46 @@ const Nav = () => {
           <span>/</span>
           <a href='/'>Explore now</a>
         </div>
-        <div className='hidden max-lg:block'>
-          <img src={hamburger} alt='hamburger icon' width={25} height={25} />
+                <div className="hidden max-lg:block">
+          <img
+            src={toggle ? close : hamburger}
+            alt="Hamburger"
+            width={25}
+            height={25}
+            className="inline-block object-contain cursor-pointer"
+            onClick={() => setToggle(!toggle)}
+          />
+
+          <div
+            className={`${
+              !toggle ? "hidden" : "flex"
+            } p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-20 rounded-xl`}
+          >
+            <ul className="list-none bg-white flex justify-end items-start flex-col gap-5 rounded-lg shadow-md padding-x">
+              {navLinks.map((link) => (
+                <li
+                  href={link.href}
+                  key={link.id}
+                  className={`${
+                    active === link.label ? "text-black" : "text-gray-500"
+                  } regular - 16 text-gray-50
+                    flexCenter cursor-pointer pb-1.5 transition - all hover:font-bold`}
+                  onClick={() => {
+                    setToggle(!toggle);
+                    setActive(link.label);
+                  }}
+                >
+                  <a
+                    href={link.href}
+                    className="font-montserrat leading-normal text-lg
+                    text-slate-gray"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
